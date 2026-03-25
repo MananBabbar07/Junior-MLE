@@ -1,7 +1,6 @@
 # 🤖 Junior-MLE: Autonomous End-to-End MLOps Pipeline
 
 [![Ollama](https://img.shields.io/badge/LLM-Ollama-red.svg)](https://ollama.ai/)
-[![Model](https://img.shields.io/badge/Model-Qwen--2.5--Coder-7b-blue.svg)](https://huggingface.co/Qwen)
 [![Hardware](https://img.shields.io/badge/GPU-RTX--3050-green.svg)](https://nvidia.com)
 [![ML Engine](https://img.shields.io/badge/Engine-XGBoost-f37021.svg)](https://xgboost.readthedocs.io/)
 [![UI](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
