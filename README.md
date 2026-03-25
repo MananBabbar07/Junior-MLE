@@ -98,20 +98,38 @@ POST /predict
 
 ```json
 {
-  "features": {
-    "Age": 29,
-    "CityTier": 1,
-    "DurationOfPitch": 32,
-    "NumberOfPersonVisiting": 2,
-    "NumberOfFollowups": 5,
-    "PreferredPropertyStar": 5,
-    "NumberOfTrips": 6,
-    "Passport": 1,
-    "PitchSatisfactionScore": 5,
-    "OwnCar": 0,
-    "NumberOfChildrenVisiting": 0,
-    "MonthlyIncome": 38000
-  }
+"features":{
+"Age":29
+"CityTier":1
+"DurationOfPitch":32
+"NumberOfPersonVisiting":2
+"NumberOfFollowups":5
+"PreferredPropertyStar":5
+"NumberOfTrips":6
+"Passport":1
+"PitchSatisfactionScore":5
+"OwnCar":1
+"NumberOfChildrenVisiting":0
+"MonthlyIncome":38000
+"TypeofContact_Company Invited":0
+"TypeofContact_Self Enquiry":1
+"Occupation_Free Lancer":0
+"Occupation_Large Business":0
+"Occupation_Salaried":1
+"Occupation_Small Business":0
+"Gender_Fe Male":0
+"Gender_Female":0
+"Gender_Male":1
+"MaritalStatus_Divorced":0
+"MaritalStatus_Married":0
+"MaritalStatus_Single":1
+"MaritalStatus_Unmarried":0
+"Designation_AVP":0
+"Designation_Executive":1
+"Designation_Manager":0
+"Designation_Senior Manager":0
+"Designation_VP":0
+}
 }
 ```
 
