@@ -1,0 +1,17 @@
+# --- Core Machine Learning & Data ---
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+
+# --- Local LLM Integration ---
+ollama
+
+# --- Local Dashboard UI ---
+streamlit
+
+# --- Production MLOps API ---
+fastapi
+uvicorn
+pydanticdocker run -p 8000:8000 junior-mle-api

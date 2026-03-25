@@ -4,12 +4,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from joblib import dump
 
-# Load the data
-df = pd.read_csv('data/processed/cleaned_data.csv')
+# Load data
+data = pd.read_csv('data/processed/cleaned_data.csv')
 
-# Separate X and y
-X = df.drop(columns=['Survived'])
-y = df['Survived']
+# Separate features (X) and target (y)
+X = data.drop(columns=['ProdTaken'])
+y = data['ProdTaken']
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -20,14 +20,12 @@ model = RandomForestClassifier(n_estimators=100, random_state=42)
 # Train the model
 model.fit(X_train, y_train)
 
-# Make predictions on the test set
+# Make predictions
 y_pred = model.predict(X_test)
 
-# Calculate the accuracy
+# Calculate and print accuracy
 accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy:.2f}')
 
-# Print the accuracy
-print(f'Accuracy: {accuracy:.4f}')
-
-# Save the trained model to 'models/baseline_model.pkl'
+# Save the trained model to a file
 dump(model, 'models/baseline_model.pkl')

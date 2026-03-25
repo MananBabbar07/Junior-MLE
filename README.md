@@ -36,9 +36,10 @@ The pipeline has been stress-tested on multiple distinct, real-world datasets of
 
 | Dataset | Volume (Rows) | Target Detected | Task Type | Final Tuned Metric |
 | :--- | :--- | :--- | :--- | :--- |
-| **Bank Marketing Campaign** | 45,211 | `deposit` | Classification | **85.6% Accuracy** |
-| **California Housing Prices** | 20,640 | `median_house_value` | Regression | **0.817 R² Score** |
-| **Travel Package Prediction** | ~4,900 | `ProdTaken` | Classification | **91.0% Accuracy** 🏆 |
+| **Diabetes Indicators** | 253,680 | `Diabetes_012` | Classification | **85.03% Accuracy** |
+| **Bank Marketing** | 45,211 | `deposit` | Classification | **85.6% Accuracy** |
+| **California Housing** | 20,640 | `median_house_value` | Regression | **0.817 R² Score** |
+| **Travel Package** | ~4,900 | `ProdTaken` | Classification | **91.0% Accuracy** 🏆 |
 | **Titanic Survival** | 891 | `Survived` | Classification | **83.1% Accuracy** |
 
 ---

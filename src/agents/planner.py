@@ -16,8 +16,9 @@ class Planner:
         self.model = model
     
     def analyze_data(self, schema_summary, sample_data, target):
+        """Generates a high-level strategy for the Coder and Tuner agents."""
         prompt = f"""
-        You are an MLE Planner. Look at this dataset metadata:
+        You are an Expert MLE Planner. Look at this dataset metadata:
         
         SCHEMA:
         {schema_summary}
@@ -27,15 +28,22 @@ class Planner:
         
         GOAL: Predict '{target}'
         
-        Respond with:
-        1. Task Type (Regression/Classification)
-        2. Preprocessing steps needed (e.g., handle NaNs, encode categories)
-        3. Recommended initial model.
+        HARDWARE ENVIRONMENT: NVIDIA RTX 3050 GPU
+        
+        MANDATORY STRATEGY RULES:
+        1. Identify Task Type (Regression/Classification).
+        2. Identify Preprocessing (Handle NaNs, Encode Categories to Numeric).
+        3. RECOMMENDED MODEL: You MUST use XGBoost (XGBClassifier or XGBRegressor).
+        4. GPU ACCELERATION: Explicitly instruct the Coder to use `tree_method='hist'` and `device='cuda'`.
+        5. DATA PATHS: Instruct the Coder to load from 'data/raw/train.csv' and save to 'data/processed/cleaned_data.csv'.
+        
+        Respond with a clear step-by-step strategy for the Coder.
         """
         response = ollama.generate(model=self.model, prompt=prompt)
         return response['response']
     
     def identify_task(self, schema, sample_data):
+        """Audits the raw data to find the target column and task type."""
         prompt = f"""
         Analyze this dataset SCHEMA and SAMPLE:
         SCHEMA: {schema}
@@ -56,7 +64,18 @@ class Planner:
         # 2. Strip out any Markdown code blocks
         clean_response = extract_code(raw_response)
         
-        # 3. Safely evaluate the clean string into a Python dictionary
-        discovery = ast.literal_eval(clean_response)
-        
-        return discovery
+        try:
+            # 3. Safely evaluate the clean string into a Python dictionary
+            discovery = ast.literal_eval(clean_response)
+            return discovery
+        except (ValueError, SyntaxError):
+            # Fallback: Use Regex to find the dictionary if the LLM included extra text
+            dict_match = re.search(r'\{.*\}', clean_response, re.DOTALL)
+            if dict_match:
+                try:
+                    return ast.literal_eval(dict_match.group())
+                except:
+                    pass
+            
+            # Final Fallback if everything fails
+            return {"target": "unknown", "task": "Classification"}
