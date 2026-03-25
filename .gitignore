@@ -14,3 +14,27 @@ logs/*.log
 
 # Generated AI scripts (Optional: keep if you want to show AI progress)
 # generated_scripts/
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment variables (Never push API keys!)
+.env
+
+# Datasets (Keep the folder, ignore the heavy files)
+data/raw/*.csv
+data/processed/*.csv
+
+# Note: If your models/tuned_model.joblib is under 50MB, you CAN push it 
+# so others can run your Docker container instantly. If it's huge, uncomment the line below:
+# models/*.joblib 
+
+# OS generated files
+.DS_Store
+Thumbs.db

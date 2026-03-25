@@ -1,70 +1,155 @@
-# 🤖 Junior-MLE: Agentic AutoML
+# 🤖 Junior-MLE: Autonomous End-to-End MLOps Pipeline
 
 [![Ollama](https://img.shields.io/badge/LLM-Ollama-red.svg)](https://ollama.ai/)
 [![Model](https://img.shields.io/badge/Model-Qwen--2.5--Coder-7b-blue.svg)](https://huggingface.co/Qwen)
 [![Hardware](https://img.shields.io/badge/GPU-RTX--3050-green.svg)](https://nvidia.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-**Junior-MLE** is a local, autonomous, self-healing machine learning pipeline. It leverages Large Language Models (LLMs) to transform raw tabular data into optimized, deployment-ready models through a recursive "Think-Code-Correct" loop.
-
----
-
-## 🏗️ Architecture
-
-The system operates as a committee of specialized AI agents that handle the end-to-end ML lifecycle:
-
-* **🕵️ Planner Agent**: Audits dataset metadata (schemas/samples) to dynamically detect the **Target Column** and **Task Type** (Classification vs. Regression).
-* **💻 Coder Agent**: Generates production-grade Python scripts for data preprocessing, null imputation, and categorical encoding.
-* **🛠️ Executor**: Orchestrates the local environment, runs generated scripts, and captures real-time logs.
-* **⚖️ Critic Agent**: The "Self-Correction" brain. If a script fails, it analyzes the traceback, fixes the code logic, and triggers a retry.
-* **📈 Tuner Agent**: Performs automated hyperparameter optimization using `GridSearchCV` to maximize baseline performance.
+[![ML Engine](https://img.shields.io/badge/Engine-XGBoost-f37021.svg)](https://xgboost.readthedocs.io/)
+[![UI](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
+[![API](https://img.shields.io/badge/API-FastAPI-009688.svg)](https://fastapi.tiangolo.com/)
+[![Deploy](https://img.shields.io/badge/Deploy-Docker-2496ED.svg)](https://www.docker.com/)
 
 ---
 
-## 🛡️ Self-Healing in Action (The Critic Loop)
+## 🚀 Overview
 
-Unlike static scripts, Junior-MLE adapts to library deprecations, task pivots, and messy data in real-time. 
+**Junior-MLE** is a local, autonomous, self-healing MLOps pipeline that acts like an AI Machine Learning Engineer.
 
-* **Library Deprecation Fix:** During a Classification run, the LLM generated deprecated Scikit-Learn code (`OneHotEncoder(sparse=False)`). The pipeline crashed. The **Critic Agent** intercepted the `TypeError`, analyzed the Python traceback, rewrote the syntax to the modern `sparse_output=False`, and successfully resumed the pipeline.
-* **Autonomous Task Pivoting:** When fed the California Housing dataset, the pipeline dynamically recognized the continuous target variable, purged its default classification logic, and self-corrected its training scripts to utilize a `RandomForestRegressor` with MSE/R2 metrics.
+It transforms raw tabular data → generates ML code → debugs itself → trains optimized models → deploys them instantly via a containerized API.
 
----
 
-## 📊 Benchmarked Datasets
-
-The pipeline has been stress-tested on multiple distinct, real-world datasets of varying sizes with zero human intervention in the code generation or model selection process.
-
-| Dataset | Volume (Rows) | Target Detected | Task Type | Final Tuned Metric |
-| :--- | :--- | :--- | :--- | :--- |
-| **Diabetes Indicators** | 253,680 | `Diabetes_012` | Classification | **85.03% Accuracy** |
-| **Bank Marketing** | 45,211 | `deposit` | Classification | **85.6% Accuracy** |
-| **California Housing** | 20,640 | `median_house_value` | Regression | **0.817 R² Score** |
-| **Travel Package** | ~4,900 | `ProdTaken` | Classification | **91.0% Accuracy** 🏆 |
-| **Titanic Survival** | 891 | `Survived` | Classification | **83.1% Accuracy** |
 
 ---
 
-## 🚀 Project Status
+## 🌟 Key Features
 
-- [x] **Directory Architecture**: Modular source structure for high scalability.
-- [x] **Metadata Extraction**: Automated schema auditing and task identification.
-- [x] **Code Generation**: LLM-driven Python scripting for data preprocessing.
-- [x] **Self-Healing Loop**: Real-time error handling and automated code correction.
-- [x] **Model Tuning**: Automated baseline optimization.
-- [ ] **Deployment Module**: (Planned) Automated FastAPI wrapper generation.
+- 🔒 100% Local & Private (Ollama + Qwen 2.5 Coder)
+- 🤖 Autonomous Code Generation
+- ♻️ Self-Healing Execution (auto-debugging)
+- ⚡ GPU-Optimized Training (XGBoost + CUDA)
+- 🐳 Instant Docker Deployment (FastAPI)
 
 ---
 
-## 📂 Repository Roadmap
+## 🏗️ System Architecture
 
-```text
+### 🧠 Multi-Agent Training Swarm
+- 🕵️ Planner Agent → dataset understanding  
+- 💻 Coder Agent → pipeline generation  
+- ⚖️ Critic Agent → error fixing  
+- 📈 Tuner Agent → hyperparameter optimization  
+
+### ⚡ Backend (FastAPI + Docker)
+- Model exported as `.joblib`
+- Served via REST API
+
+### 🎛️ Frontend (Streamlit)
+- Upload dataset
+- Monitor agents
+- Run predictions
+
+---
+
+## 📊 Performance Benchmarks
+
+| Dataset | Rows | Task | Metric |
+|--------|------|------|--------|
+| Bank Marketing | 45,211 | Classification | **94.0% Accuracy** 🏆 |
+| Travel Package | ~4,900 | Classification | **91.0% Accuracy** |
+| Diabetes | 253,680 | Classification | **85.03% Accuracy** |
+| Titanic | 891 | Classification | **83.1% Accuracy** |
+| Housing | 20,640 | Regression | **0.817 R²** |
+
+---
+
+## ⚡ Setup & Run (Full Pipeline)
+
+```bash
+git clone https://github.com/MananBabbar07/junior-mle.git
+cd junior-mle
+pip install -r requirements.txt
+docker build -t junior-mle-api .
+docker run -p 8000:8000 junior-mle-api
+```
+
+Open another terminal and run:
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 🎯 Test the System
+
+- Open → http://localhost:8501  
+- Go to → **🔮 Live Inference Form**  
+- Click → **Predict Purchase Intent**
+
+---
+
+## 🔄 End-to-End Flow
+
+Dataset → AI Agents → Code Generation → Self-Debug → Model Training → Docker API → Streamlit UI
+
+---
+
+## 🔌 API Reference
+
+POST /predict
+
+```json
+{
+  "features": {
+    "Age": 29,
+    "CityTier": 1,
+    "DurationOfPitch": 32,
+    "NumberOfPersonVisiting": 2,
+    "NumberOfFollowups": 5,
+    "PreferredPropertyStar": 5,
+    "NumberOfTrips": 6,
+    "Passport": 1,
+    "PitchSatisfactionScore": 5,
+    "OwnCar": 0,
+    "NumberOfChildrenVisiting": 0,
+    "MonthlyIncome": 38000
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "status": "success",
+  "prediction": 1.0
+}
+```
+
+---
+
+## 📂 Project Structure
+
 junior-mle/
-├── data/
-│   ├── raw/               # 📥 Input CSVs (e.g., train.csv)
-│   └── processed/         # 📤 Cleaned, encoded datasets
-├── src/
-│   ├── agents/            # 🧠 Planner, Coder, Critic, Modeler, Tuner
-│   ├── tools/             # ⚙️ Script Executor
-│   └── main.py            # 🚀 Core Orchestrator
-├── generated_scripts/     # 📝 Live scripts written by the Agent
-└── models/                # 🏆 Final .pkl model artifacts
+├── app.py  
+├── Dockerfile  
+├── requirements.txt  
+├── data/  
+├── src/  
+├── models/  
+├── generated_scripts/  
+
+---
+
+## 👨‍💻 Author
+
+**Manan Babbar**  
+https://github.com/MananBabbar07
+
+---
+
+## ⭐ Support
+
+If you like this project:
+- Star ⭐ the repo  
+- Fork 🍴 it  
+- Build on top 🚀
