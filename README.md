@@ -53,8 +53,8 @@ It transforms raw tabular data → generates ML code → debugs itself → train
 | Dataset | Rows | Task | Metric |
 |--------|------|------|--------|
 | Bank Marketing | 45,211 | Classification | **94.0% Accuracy** 🏆 |
+| Diabetes | 253,680 | Classification | **93.03% Accuracy** |
 | Travel Package | ~4,900 | Classification | **91.0% Accuracy** |
-| Diabetes | 253,680 | Classification | **85.03% Accuracy** |
 | Titanic | 891 | Classification | **83.1% Accuracy** |
 | Housing | 20,640 | Regression | **0.817 R²** |
 
