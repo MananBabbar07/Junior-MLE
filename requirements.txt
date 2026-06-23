@@ -14,4 +14,4 @@ streamlit
 # --- Production MLOps API ---
 fastapi
 uvicorn
-pydanticdocker run -p 8000:8000 junior-mle-api
+pydantic

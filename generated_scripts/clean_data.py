@@ -1,25 +1,24 @@
 import pandas as pd
 
 # Load data
-train_data = pd.read_csv('data/raw/train.csv')
+train_df = pd.read_csv('data/raw/train.csv')
 
-# Drop unnecessary columns
-train_data.drop(columns=['CustomerID', 'ProductPitched'], inplace=True)
+# Drop unique IDs, names, or hashes (if any)
+train_df.drop(columns=['Date', 'Store ID', 'Product ID'], inplace=True)
 
-# Fill missing values for numeric columns with median and categorical with mode
-numeric_features = ['Age', 'DurationOfPitch', 'NumberOfPersonVisiting', 'NumberOfFollowups', 
-                    'PreferredPropertyStar', 'NumberOfTrips', 'Passport', 'PitchSatisfactionScore', 
-                    'OwnCar', 'NumberOfChildrenVisiting', 'MonthlyIncome']
-categorical_features = ['TypeofContact', 'Occupation', 'Gender', 'MaritalStatus', 'Designation']
+# Impute missing values for numeric columns with median
+numeric_cols = ['Inventory Level', 'Units Sold', 'Units Ordered', 'Price', 'Discount', 'Competitor Pricing', 'Epidemic', 'Demand']
+for col in numeric_cols:
+    train_df[col].fillna(train_df[col].median(), inplace=True)
 
-for col in numeric_features:
-    train_data[col].fillna(train_data[col].median(), inplace=True)
+# Impute missing values for categorical columns with mode
+categorical_cols = ['Category', 'Region', 'Weather Condition', 'Promotion', 'Seasonality']
+for col in categorical_cols:
+    train_df[col].fillna(train_df[col].mode()[0], inplace=True)
 
-for col in categorical_features:
-    train_data[col].fillna(train_data[col].mode()[0], inplace=True)
+# Encode categorical variables to numeric using one-hot encoding
+train_df = pd.get_dummies(train_df, columns=categorical_cols, drop_first=True)
 
-# Encode categorical variables to numeric
-train_data_encoded = pd.get_dummies(train_data, columns=categorical_features)
-
-# Save preprocessed data
-train_data_encoded.to_csv('data/processed/cleaned_data.csv', index=False)
+# Save the cleaned data
+cleaned_data_path = 'data/processed/cleaned_data.csv'
+train_df.to_csv(cleaned_data_path, index=False)

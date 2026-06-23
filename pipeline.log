@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "C:\Users\manan\AppData\Local\Programs\Python\Python39\lib\runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\manan\AppData\Local\Programs\Python\Python39\lib\runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "E:\junior-mle\src\main.py", line 193, in <module>
+    main()
+  File "E:\junior-mle\src\main.py", line 150, in main
+    train_success, train_logs = train_executor.run()
+  File "E:\junior-mle\src\tools\executor.py", line 12, in run
+    result = subprocess.run(
+  File "C:\Users\manan\AppData\Local\Programs\Python\Python39\lib\subprocess.py", line 507, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+  File "C:\Users\manan\AppData\Local\Programs\Python\Python39\lib\subprocess.py", line 1134, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "C:\Users\manan\AppData\Local\Programs\Python\Python39\lib\subprocess.py", line 1508, in _communicate
+    self.stdout_thread.join(self._remaining_time(endtime))
+  File "C:\Users\manan\AppData\Local\Programs\Python\Python39\lib\threading.py", line 1060, in join
+    self._wait_for_tstate_lock()
+  File "C:\Users\manan\AppData\Local\Programs\Python\Python39\lib\threading.py", line 1080, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+KeyboardInterrupt
+🚀 Initializing Agentic AutoML...
+🕵️ Agent is auditing the dataset to find the target...
+🎯 Target Detected: salary
+🧠 Task Type: Regression
+🧠 Planner is strategizing...
+✅ Strategy acquired.
+💻 Coder is writing the cleaning script...
+📂 SUCCESS! Script saved to: E:\junior-mle\generated_scripts\clean_data.py
+⚙️ Executing: E:\junior-mle\generated_scripts\clean_data.py
+✅ Data cleaned successfully!
+📂 File found in data/processed/cleaned_data.csv
+✅ Data cleaned successfully after self-correction!
+✅ Data is cleaned. Proceeding to Model Training...
+🤖 Modeler is analyzing data to choose an algorithm...
+⚙️ Executing: E:\junior-mle\generated_scripts\train_model.py
+🔄 Modeler Attempt 1: Self-correcting training script...
+⚙️ Executing: E:\junior-mle\generated_scripts\train_model.py
+^C

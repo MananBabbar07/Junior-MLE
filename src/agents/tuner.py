@@ -4,9 +4,9 @@ import re
 def extract_code(raw_text):
     """Strips Markdown formatting from LLM responses."""
     text = raw_text.strip()
-    # Remove the starting ```python, ```json, or just ```
+
     text = re.sub(r'^```[a-zA-Z]*\s*', '', text, flags=re.IGNORECASE)
-    # Remove the ending ```
+   
     text = re.sub(r'\s*```$', '', text)
     return text.strip()
 
@@ -16,7 +16,7 @@ class Tuner:
 
     def generate_tuning_code(self, schema, target_col, task_type):
         """Generates a GPU-accelerated hyperparameter optimization script."""
-        # Determine the correct XGBoost class
+   
         algo = "XGBRegressor" if "Regression" in task_type else "XGBClassifier"
         
         prompt = f"""

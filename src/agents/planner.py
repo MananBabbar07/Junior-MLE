@@ -5,9 +5,9 @@ import re
 def extract_code(raw_text):
     """Strips Markdown formatting (like ```python or ```json) from LLM responses."""
     text = raw_text.strip()
-    # Remove the starting ```python, ```json, or just ```
+    
     text = re.sub(r'^```[a-zA-Z]*\s*', '', text, flags=re.IGNORECASE)
-    # Remove the ending ```
+    
     text = re.sub(r'\s*```$', '', text)
     return text.strip()
 
@@ -58,18 +58,18 @@ class Planner:
         """
         response = ollama.generate(model=self.model, prompt=prompt)
         
-        # 1. Extract the raw string from the LLM
+       
         raw_response = response['response']
         
-        # 2. Strip out any Markdown code blocks
+       
         clean_response = extract_code(raw_response)
         
         try:
-            # 3. Safely evaluate the clean string into a Python dictionary
+           
             discovery = ast.literal_eval(clean_response)
             return discovery
         except (ValueError, SyntaxError):
-            # Fallback: Use Regex to find the dictionary if the LLM included extra text
+           
             dict_match = re.search(r'\{.*\}', clean_response, re.DOTALL)
             if dict_match:
                 try:
@@ -77,5 +77,5 @@ class Planner:
                 except:
                     pass
             
-            # Final Fallback if everything fails
+       
             return {"target": "unknown", "task": "Classification"}
